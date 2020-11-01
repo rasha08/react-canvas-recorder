@@ -10,18 +10,54 @@
 npm install --save react-canvas-recorder
 ```
 
+```bash
+yarn add react-canvas-recorder
+```
+
+## About
+
+It a wrapper around _MediaRecorder_ for supported browsers check: [![MOZ](https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder)](https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder)
+
+### API
+
+```ts
+interface CanvasRecorder {
+  start: () => void
+  stop: () => void
+  save: () => Blob
+  createStream: <T extends HTMLCanvasElement>(canvas: T) => void
+}
+```
+
 ## Usage
 
 ```tsx
-import React, { Component } from 'react'
+import React, { Component, useRef, useCallback } from 'react'
+import recorder from 'react-canvas-recorder';
 
-import MyComponent from 'react-canvas-recorder'
-import 'react-canvas-recorder/dist/index.css'
+const Component () => {
+  const ref = useRef()
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+  const startRecording = useCallback(() => {
+    recorder.createStream(ref.current);
+    recorder.start();
+  }, [ref])
+
+  const stopRecording = useCallback(() => {
+    recorder.stop();
+    const file = recorder.save();
+    // Do something with the file
+  }, [])
+
+
+  return (
+    <>
+      <button onClick={startRecording}>Start Recording</button>
+      <button onClick={stopRecording}>Stop Recording</button>
+
+      <canvas ref={ref} />
+    </>
+  )
 }
 ```
 
