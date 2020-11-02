@@ -6,10 +6,12 @@ interface CanvasRecorder {
   stop: () => void
   save: () => Blob
   createStream: <T extends HTMLCanvasElement>(canvas: T) => void
+  captureMediaStream: <T extends MediaStream>(mediaStream: T) => void
+  recordScreen: () => void
 }
 
 /* eslint-disable */
-const CanvasRecorder = () => {
+const CanvasRecorder = (): CanvasRecorder => {
   const start = startRecording
   const stop = stopRecording
   const save = download
@@ -20,6 +22,16 @@ const CanvasRecorder = () => {
 
   const createStream = (canvas) => {
     stream = canvas.captureStream(150)
+  }
+
+  const captureMediaStream = (mediaStream) => {
+    stream = mediaStream
+  }
+
+  const recordScreen = async () => {
+    stream = await navigator.mediaDevices.getDisplayMedia({
+      video: { mediaSource: 'screen' }
+    })
   }
 
   function startRecording() {

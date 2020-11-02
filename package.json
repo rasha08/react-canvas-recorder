@@ -1,7 +1,8 @@
 {
   "name": "react-canvas-recorder",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Canvas Element Recorder for React, with really simple API",
+  "keywords": ["react", "canvas", "canvas-recorder", "canvas animation", "animation recorder" ],
   "author": "rasha08",
   "license": "MIT",
   "repository": "rasha08/react-canvas-recorder",

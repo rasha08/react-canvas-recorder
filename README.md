@@ -26,10 +26,14 @@ interface CanvasRecorder {
   stop: () => void
   save: () => Blob
   createStream: <T extends HTMLCanvasElement>(canvas: T) => void
+  captureMediaStream: <T extends MediaStream>(mediaStream: T) => void
+  recordScreen: () => void
 }
 ```
 
 ## Usage
+
+### Record canvas element
 
 ```tsx
 import React, { Component, useRef, useCallback } from 'react'
@@ -56,6 +60,37 @@ const Component () => {
       <button onClick={stopRecording}>Stop Recording</button>
 
       <canvas ref={ref} />
+    </>
+  )
+}
+```
+
+### Record entire screen
+
+```tsx
+import React, { Component, useRef, useCallback } from 'react'
+import recorder from 'react-canvas-recorder';
+
+const Component () => {
+
+  const startRecording = useCallback(async () => {
+    await recorder.recordScreen();
+    recorder.start();
+  }, [ref])
+
+  const stopRecording = useCallback(() => {
+    recorder.stop();
+    const file = recorder.save();
+    // Do something with the file
+  }, [])
+
+
+  return (
+    <>
+      <button onClick={startRecording}>Start Recording</button>
+      <button onClick={stopRecording}>Stop Recording</button>
+
+      <div>Some Content...</div>
     </>
   )
 }
