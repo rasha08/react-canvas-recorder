@@ -1,6 +1,6 @@
 {
   "name": "react-canvas-recorder",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Canvas Element Recorder for React, with really simple API",
   "keywords": ["react", "canvas", "canvas-recorder", "canvas animation", "animation recorder" ],
   "author": "rasha08",
@@ -25,7 +25,7 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": ">=16.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
